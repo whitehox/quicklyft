@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Button,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import imager from '../../assets/cars.png';
 import driverless from '../../assets/track.png';
 import confirm from '../../assets/qr-code.png';
@@ -14,7 +8,7 @@ import confirm from '../../assets/qr-code.png';
 import * as Font from 'expo-font';
 import Swiper from 'react-native-swiper';
 
-export default function App() {
+function Home({ navigation }) {
   const [isFontReady, setFontReady] = useState(false);
   useEffect(() => {
     async function loadFont() {
@@ -111,7 +105,11 @@ export default function App() {
             real time on the map
           </Text>
         )}
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('SignUp');
+          }}
+        >
           <Text style={styles.button}>GET STARTED!</Text>
         </TouchableOpacity>
       </View>
@@ -140,7 +138,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     color: 'white',
     fontSize: 14,
-    // fontWeight: 'bold',
     overflow: 'hidden',
     padding: 12,
     textAlign: 'center',
@@ -148,3 +145,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
+export default withNavigation(Home);
